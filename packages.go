@@ -38,7 +38,8 @@ func (ap *ArchPackage) Installed() bool {
 }
 
 func NewArchPackage(name string) (*ArchPackage, error) {
-	out, err := exec.Command("LC_ALL=C /usr/bin/pacman -Ql " + name).CombinedOutput()
+	// TODO: Find out how to set LC_ALL=C before executing
+	out, err := exec.Command("/usr/bin/pacman", "-Ql", name).CombinedOutput()
 	if err != nil {
 		return nil, err
 	}
